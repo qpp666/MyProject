@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- connection, prepareStatement -->
+<!DOCTYPE configuration  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-config.dtd"> 
+<!-- (properties?, settings?, typeAliases?, typeHandlers?, objectFactory?, objectWrapperFactory?, 
+ reflectorFactory?, plugins?, environments?, databaseIdProvider?, mappers?) -->
+<configuration>
+
+ <!-- VO등록 -->
+ <typeAliases> <!-- (typeAlias*, package*) -->
+ 
+  <!-- VO등록 -->
+	<typeAlias type="com.sist.dao.StudentVO" alias="VO"/>
+ 	
+ </typeAliases>
+ 
+ 
+ 
+ 
+ 
+ <!-- Connection : DB정보 (driverClassName,url,username,password : maxActive:8 maxIdle:8)-->
+ <environments default="development"> <!-- (environment+) -->
+ 	<environment id="development"> <!-- (transactionManager, dataSource) 디폴트니까 한번만 사용하고 반드시 사용해야된다. -->
+ 		
+ 		<transactionManager type="JDBC"/>
+ 		<!--
+ 		 transaction : 일괄처리 =commit, rollback, savepoint
+ 		 시스템 : JDBC (자동처리 하라)
+ 		 관리 : MANAGED
+ 		  
+ 		-->
+ 		
+ 		<dataSource type="POOLED">
+ 			<!-- 
+ 				방식 
+ 					-일반 JDBC (관리가 어렵고 뭐 느리고)		:UNPOOLED
+ 					-DBCP (열고닫고에 좋은거같은데 왜좋지)	:POOLED
+ 			 -->
+ 			<!-- DB정보 전송 (여기가 getconnection(),disconnection() 이 있는 위치.) -->
+ 			<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+ 			<property name="url" value="jdbc:oracle:thin:@localhost:1521:ORCL"/>
+ 			<property name="username" value="scott"/>
+ 			<property name="password" value="tiger"/>
+ 		</dataSource>
+ 	
+ 	</environment>
+ </environments>
+ 
+ 
+ 
+ 
+ 
+ 
+ <!-- sql문 -->
+ <mappers><!-- (mapper*, package*) -->
+ 	<!-- include -->
+	<mapper resource="com/sist/dao/student-mapper.xml"/>
+ 
+ </mappers>
+</configuration>
